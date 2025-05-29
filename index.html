@@ -1,16 +1,394 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mohammed Reda|Portfolio</title>
+    <title>Mohammed Reda | Portfolio</title>
     <meta name="description" content="This is my portfolio website & I'm Mohammed Reda, I'm a web developer & I love to code.">
     <meta name="keywords" content="Mohammed Reda, Mohammed Reda Portfolio, portofolio, portfolio, web developer, web designer, web developer portfolio, web designer portfolio, web developer portfolio">
     <meta name="author" content="Mohammed Reda">
     <meta name="copyright" content="Mohammed Reda">
-    <link rel="icon" type="image/x-icon" href="favicon_cropped.ico">
+    <link rel="icon" type="image/x-icon" href="converted_icon.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* Theme variables */
+        html[data-theme="light"] {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --text-color: #1f2937;
+            --bg-color: #f8fafc;
+            --section-bg: #ffffff;
+            --accent-color: #3b82f6;
+            --card-shadow: rgba(0,0,0,0.05);
+            --header-shadow: rgba(0,0,0,0.1);
+        }
+
+        html[data-theme="dark"] {
+            --primary-color: #60a5fa;
+            --secondary-color: #3b82f6;
+            --text-color: #f3f4f6;
+            --bg-color: #111827;
+            --section-bg: #1f2937;
+            --accent-color: #60a5fa;
+            --card-shadow: rgba(0,0,0,0.2);
+            --header-shadow: rgba(0,0,0,0.3);
+        }
+
+        /* Theme toggle button */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: var(--section-bg);
+            border: none;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 8px var(--card-shadow);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: var(--secondary-color);
+        }
+
+        /* Update existing styles to use new shadow variables */
+        header {
+            background-color: var(--section-bg);
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px var(--header-shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        section {
+            background: var(--section-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px var(--card-shadow);
+        }
+
+        .card {
+            background: var(--section-bg);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px var(--card-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        /* Add transition for smooth theme switching */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links a {
+            color: var(--primary-color);
+            margin-left: 1.5rem;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 6rem auto 2rem;
+            padding: 0 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .nav-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .certificate-card {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .project-card {
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .skill-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .skill-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: var(--section-bg);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    
+    <header>
+        <div class="header-content">
+            <h1>Mohammed Reda</h1>
+            <div class="social-links">
+                <a href="https://github.com/MoReda7/MoReda7" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100084244103531" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.youtube.com/@HaLeLLo" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://x.com/HaLeLLo_" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav class="nav-links">
+            <a href="#about">About Me</a>
+            <a href="#certificates">Certificates</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+        </nav>
+
+        <section id="about">
+            <h2>Who am I?</h2>
+            <p style="font-size: 25px;">
+                I'm a junior web developer with a growing passion for creating engaging web experiences.
+                Starting my journey in web development, I've already built several projects using HTML, CSS, and Python.
+                Every line of code I write is a step toward becoming a skilled developer, and I'm excited to take on new challenges
+                and contribute to innovative web solutions.
+            </p>
+        </section>
+
+        <section id="certificates">
+            <h2>Certificates</h2>
+            <div class="grid">
+                <div class="card certificate-card">
+                    <h3>1st at Cairo Governorate</h3>
+                    <p>DECI level 1 Almentor | Almentor & MCIT</p>
+                    <a href="https://drive.google.com/file/d/17LGuTd6OHKkCx3AiP4j3zybaa-wk2ITI/view?usp=sharing" target="_blank">View Certificate</a>
+                </div>
+                <div class="card certificate-card">
+                    <h3>Internet Heroes</h3>
+                    <p>Google</p>
+                    <a href="https://drive.google.com/file/d/1r_Nm5jeVV-WK_gm3HTx4bg0xFQ4Jjn-x/view?usp=sharing" target="_blank">View Certificate</a>
+                </div>
+                <div class="card certificate-card">
+                    <h3>DECI Level 1</h3>
+                    <p>Almentor & MCIT</p>
+                    <a href="https://drive.google.com/file/d/1U7vrch3kMqYmLCI0cnvPtHE7T9HF2kr-/view?usp=sharing" target="_blank">View Certificate</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Programming Languages & Skills</h2>
+            <div class="grid">
+                <div class="card skill-card">
+                    <i class="fab fa-python"></i>
+                    <h3>Python</h3>
+                    <p>Building powerful applications with clean, efficient code</p>
+                </div>
+                <div class="card skill-card">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML</h3>
+                    <p>Crafting structured and semantic web content</p>
+                </div>
+                <div class="card skill-card">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS</h3>
+                    <p>Creating beautiful and responsive designs</p>
+                </div>
+                <div class="card skill-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>MIT AI</h3>
+                    <p>Developing innovative mobile solutions</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="grid">
+                <div class="card project-card">
+                    <h3>How to make BELELA easily</h3>
+                    <p>This is my first completed website</p>
+                    <a href="https://howtomakebelelaeasily.netlify.app/" target="_blank">View Project</a>
+                </div>
+                <div class="card project-card">
+                    <h3>A lot of python projects</h3>
+                    <p>A package of Python projects</p>
+                    <a href="https://github.com/MoReda7/A-lot-of-python-projects" target="_blank">View on GitHub</a>
+                </div>
+                <div class="card project-card">
+                    <h3>MR7 Toolkit</h3>
+                    <p>All in one app I have made</p>
+                    <a href="https://drive.google.com/file/d/1jTQHOQ6riDdwSxLPaWFjjrXuuwENsTz_/view?usp=sharing" target="_blank">View Project</a>
+                </div>
+                <div class="card project-card">
+                    <h3>School Mate</h3>
+                    <p>A group project for DECI certification</p>
+                    <a href="https://drive.google.com/file/d/1PArYZw0VLPCI4KXPGpenjjXmSy1A5OBn/view?usp=sharing" target="_blank">View Project</a>
+                </div>
+                <div class="card project-card">
+                    <h3>The dog zangtation syndrome</h3>
+                    <p>A troll web page about the dog zangtation syndrome 🐶</p>
+                    <a href="https://the-dog-zangtation-syndrome.netlify.app/" target="_blank">View</a>
+                </div>
+                <div class="card project-card">
+                    <h3>Final project|Level 2</h3>
+                    <p>This is my final project for DECI level 2</p>
+                    <a href="https://drive.google.com/drive/folders/1CS1PzyrgdyS7rqhc690WjbnzhT2xIKIo?usp=drive_link" target="_blank">View</a>
+                </div>
+                <div class="card project-card">
+                    <h3>Auroriva</h3>
+                    <p>The web page I made for the final project of DECI level 2</p>
+                    <a href="https://auroriva.netlify.app/" target="_blank">View</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>Mohammed Reda &copy; 2024</p>
+        <div class="footer-links">
+            <a href="https://github.com/MoReda7/MoReda7" target="_blank">GitHub</a>
+            <a href="https://www.facebook.com/profile.php?id=100084244103531" target="_blank">Facebook</a>
+            <a href="https://www.youtube.com/@HaLeLLo" target="_blank">YouTube</a>
+            <a href="https://x.com/HaLeLLo_" target="_blank">X</a>
+        </div>
+    </footer>
+
+    <button class="theme-toggle" aria-label="Toggle dark mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+        const themeIcon = themeToggle.querySelector('i');
+
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+        }
+    </script>
 </body>
 </html>
